@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ANSI Reader</title>
+</head>
+
+<xmp theme="cerulean" style="display:none;">
+
+## 簡介 ANSI Reader
+
+Unix Terminal 上的訊息是純文字檔，為了呈現基本的文字標示，像是文字顏色、背景顏色、底線 ... 等，而提供的格式，此格式稱為 [ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors)。最常見的應用就是 BBS 、Unix Terminal 登入之後提示字元 (Prompt) 的顯示 ... 等。
+
+以下範例是 PTT 上範例：
+
+* 原始檔： [original_msg.utf8.txt](original_msg.utf8.txt)
+* 結果：https://www.ptt.cc/bbs/ONE_PIECE/M.1437891177.A.F38.html
+
+## ANSI escape code 基本說明
+
+
+Control Code:
+
+* `\033` 為控制字元，有時候會用 `*` 顯示，方便閱讀
+* `*[`: start
+* `*[m`: Close
+
+Color Table:
+
+* Color Code
+    * 0: Black
+    * 1: Red
+    * 2: Green
+    * 3: Yellow
+    * 4: Blue
+    * 5: Magenta
+    * 6: Cyan
+    * 7: White
+* Foreground and Background
+    * 3: Foreground
+    * 4: Background
+* Color Structure
+    * 34: foreground with blue
+    * 40: background with black (default)
+
+
+## 題目
+
+寫一個 function(X)：
+
+* X as String: 一篇包含 ansi code 的文章。資料可以去 PTT 隨便找一篇文章，按下 “F” 轉寄到自己的信箱，或者參考附件 [original_msg.utf8.txt](original_msg.utf8.txt) 。
+* 文章經過此 function 處理之後，回傳 HTML 內容，結果如：https://www.ptt.cc/bbs/movie/M.1468848054.A.77E.html
+* 此 function 只需要實作處理 background and foreground 即可，實作其他 Control Code 加分。
+
+
+範例：
+
+輸入 X 為以下內容：
+
+```
+*[1;31;45m  魔戒三  *[m
+```
+
+回傳結果為：
+
+```
+<span class="fg1 bg1">  魔戒三  </span>
+```
+
+會顯示 Red 文字、Magenta 為底色。
+
+
+註：
+
+* 如果自行轉寄 PTT 文章，要將 Encoding 轉成 UTF8，以下為轉檔方式：
+
+```
+iconv -f cp950 original_msg.txt > original_msg.utf8.txt
+iconv -f big5-2003 original_msg.txt > original_msg.utf8.txt
+```
+* 如果是轉寄給到 gmail，可以在信件右上角選擇 `Show Original`， gmail 開啟新 window 之後，就可以點選 `Download Original` 下載原始檔。
+
+
+## 回傳結果
+
+請使用 `node.js`、`python`、`golang` 實作，透過以下方式呈現：
+
+* 回傳 `source code` 以及產出的 `html`，還有相關的 js, css 檔。
+* 將此實作上傳 `github`，並附上 `README.md` 說明如何執行。
+
+
+## Reference
+
+* https://en.wikipedia.org/wiki/ANSI_escape_code#Color
+* https://www.ptt.cc/bbs/ONE_PIECE/M.1437891177.A.F38.html
+
+
+</xmp>
+<script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
+</html>
