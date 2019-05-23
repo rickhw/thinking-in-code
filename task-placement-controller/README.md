@@ -55,9 +55,10 @@ TaskDefines = {
 }
 
 Mission_A = { A: 5, B: 2, C: 3, D: 1, E: 2 }
-Mission_A = { A: 1, B: 2, C: 3, D: 5, E: 4 }
+Mission_B = { A: 1, B: 2, C: 3, D: 5, E: 4 }
 
 // 分配器
 Distributor(TaskDefines, Mission_A)
 Distributor(TaskDefines, Mission_B)
+Distributor(TaskDefines, Mission_A + Mission_B)
 ```
